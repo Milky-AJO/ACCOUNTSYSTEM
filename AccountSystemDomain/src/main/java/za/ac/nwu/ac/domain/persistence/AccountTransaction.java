@@ -3,38 +3,36 @@ package za.ac.nwu.ac.domain.persistence;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "ACCOUNT_TRX", schema = "ANDREAS")
+@Table(name = "ACCOUNT_TRX", schema = "ACCOUNT_SYS")
 public class AccountTransaction implements Serializable {
-    @Id
-    @SequenceGenerator(name = "GENERIC_SEQ",sequenceName = "ANDREAS.GENERIC_SEQ",allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GENERIC_SEQ")
 
-    @Column(name = "ACC_TRX_ID")
     private Long accountTrxId;
-
-    @Column(name = "ACCOUNT_TYPE_ID")
     private AccountType accountType;
-
-    @Column(name = "MEMBER_ID")
     private Long memberId;
-
-    @Column(name = "ACC_TRX_AMOUNT")
     private Long accountTrxAmount;
+    private LocalDate accountTrxDate;
+
+
+    public AccountTransaction(Long accountTrxId, AccountType accountType, Long memberId, Long accountTrxAmount, LocalDate accountTrxDate) {
+        this.accountTrxId = accountTrxId;
+        this.accountType = accountType;
+        this.memberId = memberId;
+        this.accountTrxAmount = accountTrxAmount;
+        this.accountTrxDate = accountTrxDate;
+    }
 
     public AccountTransaction() {
 
     }
 
-    public AccountTransaction(Long accountTrxId, AccountType accountType, Long memberId, Long accountTrxAmount) {
-        this.accountTrxId = accountTrxId;
-        this.accountType = accountType;
-        this.memberId = memberId;
-        this.accountTrxAmount = accountTrxAmount;
-    }
-
+    @Id
+    @SequenceGenerator(name = "GENERIC_SEQ",sequenceName = "ACCOUNT_SYS.GENERIC_SEQ",allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GENERIC_SEQ")
+    @Column(name = "ACC_TRX_ID")
     public Long getAccountTrxId() {
         return accountTrxId;
     }
@@ -53,6 +51,7 @@ public class AccountTransaction implements Serializable {
         this.accountType = accountType;
     }
 
+    @Column(name = "MEMBER_ID")
     public Long getMemberId() {
         return memberId;
     }
@@ -61,6 +60,7 @@ public class AccountTransaction implements Serializable {
         this.memberId = memberId;
     }
 
+    @Column(name = "ACC_TRX_AMOUNT")
     public Long getAccountTrxAmount() {
         return accountTrxAmount;
     }
@@ -69,17 +69,26 @@ public class AccountTransaction implements Serializable {
         this.accountTrxAmount = accountTrxAmount;
     }
 
+    @Column(name = "ACC_TRX_DATE")
+    public LocalDate getAccountTrxDate() {
+        return accountTrxDate;
+    }
+
+    public void setAccountTrxDate(LocalDate accountTrxDate) {
+        this.accountTrxDate = accountTrxDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountTransaction that = (AccountTransaction) o;
-        return Objects.equals(accountTrxId, that.accountTrxId) && Objects.equals(accountType, that.accountType) && Objects.equals(memberId, that.memberId) && Objects.equals(accountTrxAmount, that.accountTrxAmount);
+        return Objects.equals(accountTrxId, that.accountTrxId) && Objects.equals(accountType, that.accountType) && Objects.equals(memberId, that.memberId) && Objects.equals(accountTrxAmount, that.accountTrxAmount) && Objects.equals(accountTrxDate, that.accountTrxDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountTrxId, accountType, memberId, accountTrxAmount);
+        return Objects.hash(accountTrxId, accountType, memberId, accountTrxAmount, accountTrxDate);
     }
 
     @Override
@@ -89,6 +98,7 @@ public class AccountTransaction implements Serializable {
                 ", accountType=" + accountType +
                 ", memberId=" + memberId +
                 ", accountTrxAmount=" + accountTrxAmount +
+                ", accountTrxDate=" + accountTrxDate +
                 '}';
     }
 }

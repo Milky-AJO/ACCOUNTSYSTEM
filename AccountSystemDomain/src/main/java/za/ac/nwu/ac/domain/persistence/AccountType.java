@@ -7,27 +7,15 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "ACCOUNT_TYPE", schema = "ANDREAS")
+@Table(name = "ACCOUNT_TYPE", schema = "ACCOUNT_SYS")
 public class AccountType implements Serializable {
-    @Id
-    @SequenceGenerator(name = "GENERIC_SEQ",sequenceName = "ANDREAS.GENERIC_SEQ",allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GENERIC_SEQ")
-    @Column(name = "ACCOUNT_TYPE_ID")
+
     private Long accountTypeId;
-
-    @Column(name = "MNEMONIC")
     private String mnemonic;
-
-    @Column(name = "ACCOUNT_TYPE_NAME")
     private String accountTypeName;
-
-    @Column(name = "CREATION_DATE")
     private LocalDate createDate;
 
     private Set<AccountTransaction> accountTransactions;
-
-    public AccountType() {
-    }
 
     public AccountType(Long accountTypeId, String mnemonic, String accountTypeName, LocalDate createDate) {
         this.accountTypeId = accountTypeId;
@@ -36,6 +24,13 @@ public class AccountType implements Serializable {
         this.createDate = createDate;
     }
 
+    public AccountType() {
+    }
+
+    @Id
+    @SequenceGenerator(name = "GENERIC_SEQ",sequenceName = "ACCOUNT_SYS.GENERIC_SEQ",allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GENERIC_SEQ")
+    @Column(name = "ACCOUNT_TYPE_ID")
     public Long getAccountTypeId() {
         return accountTypeId;
     }
@@ -44,6 +39,7 @@ public class AccountType implements Serializable {
         this.accountTypeId = accountTypeId;
     }
 
+    @Column(name = "MNEMONIC")
     public String getMnemonic() {
         return mnemonic;
     }
@@ -52,6 +48,7 @@ public class AccountType implements Serializable {
         this.mnemonic = mnemonic;
     }
 
+    @Column(name = "ACCOUNT_TYPE_NAME")
     public String getAccountTypeName() {
         return accountTypeName;
     }
@@ -70,6 +67,7 @@ public class AccountType implements Serializable {
         this.accountTypeName = accountTypeName;
     }
 
+    @Column(name = "CREATION_DATE")
     public LocalDate getCreateDate() {
         return createDate;
     }
