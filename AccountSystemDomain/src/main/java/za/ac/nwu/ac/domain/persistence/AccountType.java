@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "ACCOUNT_TYPE", schema = "ANDREAS")
@@ -22,6 +23,8 @@ public class AccountType implements Serializable {
 
     @Column(name = "CREATION_DATE")
     private LocalDate createDate;
+
+    private Set<AccountTransaction> accountTransactions;
 
     public AccountType() {
     }
@@ -53,6 +56,16 @@ public class AccountType implements Serializable {
         return accountTypeName;
     }
 
+    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountType", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    public Set<AccountTransaction> getAccountTransactions() {
+        return accountTransactions;
+    }
+
+    public void setAccountTransactions(Set<AccountTransaction> accountTransactions)
+    {
+        this.accountTransactions= accountTransactions;
+    }
+
     public void setAccountTypeName(String accountTypeName) {
         this.accountTypeName = accountTypeName;
     }
@@ -76,5 +89,15 @@ public class AccountType implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(accountTypeId, mnemonic, accountTypeName, createDate);
+    }
+
+    @Override
+    public String toString() {
+        return "AccountType{" +
+                "accountTypeId=" + accountTypeId +
+                ", mnemonic='" + mnemonic + '\'' +
+                ", accountTypeName='" + accountTypeName + '\'' +
+                ", createDate=" + createDate +
+                '}';
     }
 }
