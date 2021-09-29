@@ -3,6 +3,7 @@ package za.ac.nwu.ac.domain.persistence;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name = "ACCOUNT_TYPE", schema = "ANDREAS")
@@ -21,4 +22,59 @@ public class AccountType implements Serializable {
 
     @Column(name = "CREATION_DATE")
     private LocalDate createDate;
+
+    public AccountType() {
+    }
+
+    public AccountType(Long accountTypeId, String mnemonic, String accountTypeName, LocalDate createDate) {
+        this.accountTypeId = accountTypeId;
+        this.mnemonic = mnemonic;
+        this.accountTypeName = accountTypeName;
+        this.createDate = createDate;
+    }
+
+    public Long getAccountTypeId() {
+        return accountTypeId;
+    }
+
+    public void setAccountTypeId(Long accountTypeId) {
+        this.accountTypeId = accountTypeId;
+    }
+
+    public String getMnemonic() {
+        return mnemonic;
+    }
+
+    public void setMnemonic(String mnemonic) {
+        this.mnemonic = mnemonic;
+    }
+
+    public String getAccountTypeName() {
+        return accountTypeName;
+    }
+
+    public void setAccountTypeName(String accountTypeName) {
+        this.accountTypeName = accountTypeName;
+    }
+
+    public LocalDate getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDate createDate) {
+        this.createDate = createDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AccountType that = (AccountType) o;
+        return Objects.equals(accountTypeId, that.accountTypeId) && Objects.equals(mnemonic, that.mnemonic) && Objects.equals(accountTypeName, that.accountTypeName) && Objects.equals(createDate, that.createDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(accountTypeId, mnemonic, accountTypeName, createDate);
+    }
 }
