@@ -1,5 +1,8 @@
 package za.ac.nwu.ac.domain.persistence;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -60,6 +63,7 @@ public class AccountType implements Serializable {
     }
 
     @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountType", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @JsonManagedReference
     public Set<AccountTransaction> getAccountTransactions() {
         return accountTransactions;
     }

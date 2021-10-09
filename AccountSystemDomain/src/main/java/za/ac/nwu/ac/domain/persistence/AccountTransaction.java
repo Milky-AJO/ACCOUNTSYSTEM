@@ -1,6 +1,8 @@
 package za.ac.nwu.ac.domain.persistence;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -17,6 +19,10 @@ public class AccountTransaction implements Serializable {
     private LocalDate accountTrxDate;
 
 
+    public AccountTransaction() {
+
+    }
+
     public AccountTransaction(Long accountTrxId, AccountType accountType, Long memberId, Long accountTrxAmount, LocalDate accountTrxDate) {
         this.accountTrxId = accountTrxId;
         this.accountType = accountType;
@@ -25,9 +31,13 @@ public class AccountTransaction implements Serializable {
         this.accountTrxDate = accountTrxDate;
     }
 
-    public AccountTransaction() {
-
+    public AccountTransaction(AccountType accountType, Long memberId, Long accountTrxAmount, LocalDate accountTrxDate) {
+        this.accountType = accountType;
+        this.memberId = memberId;
+        this.accountTrxAmount = accountTrxAmount;
+        this.accountTrxDate = accountTrxDate;
     }
+
 
     @Id
     @SequenceGenerator(name = "GENERIC_SEQ",sequenceName = "ACCOUNT_SYS.GENERIC_SEQ",allocationSize = 1)
@@ -43,6 +53,7 @@ public class AccountTransaction implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ACCOUNT_TYPE_ID")
+    @JsonBackReference
     public AccountType getAccountType() {
         return accountType;
     }

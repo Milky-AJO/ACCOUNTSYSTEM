@@ -27,10 +27,5 @@ public class FetchAccountTypeFlowImpl implements FetchAccountTypeFlow {
         return accountTypeTranslator.getAllAccountTypes();
     }
 
-
-//    @Override
-//    public List<AccountTypeDto> getAllAccountTypes() {
-//        return null;
-//    }
 }
 
