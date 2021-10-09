@@ -27,6 +27,12 @@ public class AccountType implements Serializable {
     public AccountType() {
     }
 
+    public AccountType(String mnemonic, String accountTypeName, LocalDate creationDate) {
+        this.mnemonic = mnemonic;
+        this.accountTypeName = accountTypeName;
+        this.createDate = creationDate;
+    }
+
     @Id
     @SequenceGenerator(name = "GENERIC_SEQ",sequenceName = "ACCOUNT_SYS.GENERIC_SEQ",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GENERIC_SEQ")
