@@ -37,6 +37,9 @@ public class AccountTransactionDto implements Serializable {
         this.setAccountTrxDate(accountTransaction.getAccountTrxDate());
     }
 
+    public AccountTransactionDto(int accountTransaction) {
+    }
+
     @ApiModelProperty(position = 1,
             value = "AccountTransaction AccountType",
             name = "AccountType",

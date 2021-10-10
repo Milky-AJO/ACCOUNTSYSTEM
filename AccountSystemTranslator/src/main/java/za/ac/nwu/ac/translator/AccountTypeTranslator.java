@@ -8,4 +8,6 @@ public interface AccountTypeTranslator {
     List<AccountTypeDto> getAllAccountTypes();
 
     AccountTypeDto create(AccountTypeDto accountType);
+
+    AccountTypeDto setAccountTypeToDollar(Long accountTypeId);
 }

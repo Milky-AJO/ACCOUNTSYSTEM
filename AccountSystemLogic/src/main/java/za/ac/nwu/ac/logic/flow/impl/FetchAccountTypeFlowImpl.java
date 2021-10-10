@@ -27,5 +27,10 @@ public class FetchAccountTypeFlowImpl implements FetchAccountTypeFlow {
         return accountTypeTranslator.getAllAccountTypes();
     }
 
+    @Override
+    public AccountTypeDto setAccountTypeToDollar(Long accountTypeId) {
+        return accountTypeTranslator.setAccountTypeToDollar(accountTypeId);
+    }
+
 }
 

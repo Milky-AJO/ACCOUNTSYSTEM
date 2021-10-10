@@ -40,4 +40,44 @@ public class AccountTransactionTranslatorImpl implements AccountTransactionTrans
         return accountTransactionDtos;
     }
 
+    @Override
+    public AccountTransactionDto setTransactionAmount(Long accountTrxMember)
+    {
+        try{
+            int accountTransaction = accountTransactionRepository.setTransactionAmount(accountTrxMember);
+            return new AccountTransactionDto(accountTransaction);
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException("Unable to read from the database.", e);
+        }
+    }
+
+    @Override
+    public AccountTransactionDto setTransactionAmountMin(Long accountTrxMemberMin)
+    {
+        try{
+            int accountTransaction = accountTransactionRepository.setTransactionAmountMin(accountTrxMemberMin);
+            return new AccountTransactionDto(accountTransaction);
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException("Unable to read from the database.", e);
+        }
+    }
+
+    @Override
+    public AccountTransactionDto setTransactionType(Long accountTransId)
+    {
+        try{
+            int accountTransaction = accountTransactionRepository.setTransactionType(accountTransId);
+            return new AccountTransactionDto(accountTransaction);
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException("Unable to read from the database.", e);
+        }
+    }
+
+
 }
